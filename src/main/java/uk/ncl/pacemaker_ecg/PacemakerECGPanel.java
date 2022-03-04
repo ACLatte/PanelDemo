@@ -1,6 +1,6 @@
 package uk.ncl.pacemaker_ecg;
 
-import uk.ncl.pojo.HeartECGData;
+import uk.ncl.pojo.PacemakerModeData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,8 @@ public class PacemakerECGPanel extends JPanel {
     private final int TEP = 5;
     //inital x-axis value
     private int xValue = 100;
-    private int count = -1;
+    private int count = 0;
+    private int allCount = 50;
 
     //prepare the List to store x-axis data
     private List<Integer> x_axis = new ArrayList<Integer>();
@@ -22,13 +23,12 @@ public class PacemakerECGPanel extends JPanel {
     //prepare the List to store y-axis data
     private List<Integer> y_axis = new ArrayList<Integer>();
 
+    private static ArrayList<Integer> temporary = new ArrayList<Integer>();
+
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (count == 49){
-            count = -1;
-        }
-        count++;
+
         //before every paint ecg chart clear entity panel
         g.clearRect(0,0,1200,150);
         g.setColor(Color.RED);
@@ -40,6 +40,7 @@ public class PacemakerECGPanel extends JPanel {
 
         y_axis.add(singleYData());
 
+
         if (xValue > 1100){
             //the length of x_axis 1100;
             y_axis.remove(0);
@@ -49,9 +50,9 @@ public class PacemakerECGPanel extends JPanel {
         int[] x_array = new int[201];
         int[] y_array = new int[201];
 
-       for (int i = 0; i<x_axis.size() ;i++ ){
-           x_array[i] = x_axis.get(i);
-       }
+        for (int i = 0; i<x_axis.size() ;i++ ){
+            x_array[i] = x_axis.get(i);
+        }
         for (int i = 0; i<y_axis.size() ;i++ ){
             y_array[i] = y_axis.get(i);
         }
@@ -62,11 +63,53 @@ public class PacemakerECGPanel extends JPanel {
     }
 
     public int singleYData(){
-        HeartECGData heartECGData = new HeartECGData();
-        ArrayList<Integer> ecgSetData = heartECGData.getEcgSetData();
-        Integer data1 = ecgSetData.get(count);
-        return data1;
+        ArrayList<Integer> ecgSetData = PacemakerModeData.getEcgSetData();
+        if (temporary.size() == ecgSetData.size()){
+            if (count >= allCount){
+                count = 0;
+            }
+            Integer data = temporary.get(count);
+            count++;
+            return data;
+        }else {
+            if (count < allCount){
+                Integer data = temporary.get(count);
+                count++;
+                return data;
+            }else{
+                count = 0;
+                allCount = PacemakerModeData.getCount();
+                temporary.clear();
+                temporary.addAll(ecgSetData);
+                return temporary.get(count);
+            }
+        }
     }
+
+    public static void initTemporary(){
+        for (int i = 0; i< 27;i++){
+            temporary.add(100);
+        }
+        temporary.add(70);
+        for (int i = 0; i< 20;i++){
+            temporary.add(100);
+        }
+        temporary.add(20);
+        temporary.add(120);
+    }
+
+    public static void addData(){
+        for (int i = 0; i< PacemakerModeData.frequency;i++){
+            temporary.add(100);
+        }
+        temporary.add(PacemakerModeData.saNode);
+        for (int i = 0; i< PacemakerModeData.prInterval;i++){
+            temporary.add(100);
+        }
+        temporary.add(PacemakerModeData.avNode1);
+        temporary.add(PacemakerModeData.avNode2);
+    }
+
 
 
 }

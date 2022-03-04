@@ -6,10 +6,10 @@ public class HeartECGData {
     //the middle value of chart
     public static int middleNode = 100;
     //avNode fixed Height
-    public static int avNode = 70;
+    public static int saNode = 70;
     //saNode fixed Height
-    public static int saNode1 = 20;
-    public static int saNode2 = 120;
+    public static int avNode1 = 20;
+    public static int avNode2 = 120;
     //Heart Rate can adjust 0-220
     private static int frequency = 27;
     //Heart Rate can adjust 0-550
@@ -30,24 +30,24 @@ public class HeartECGData {
         for (int i = 0; i< frequency;i++){
             dataSet.add(middleNode);
         }
-        dataSet.add(avNode);
+        dataSet.add(saNode);
         for (int i = 0; i< prInterval;i++){
             dataSet.add(middleNode);
         }
-        dataSet.add(saNode1);
-        dataSet.add(saNode2);
+        dataSet.add(avNode1);
+        dataSet.add(avNode2);
     }
 
     public static void EcgDie(){
-        avNode = 100;
-        saNode1 = 100;
-        saNode2 = 100;
+        saNode = 100;
+        avNode1 = 100;
+        avNode2 = 100;
     }
 
     public static void EcgRevive(){
-        avNode = 70;
-        saNode1 = 20;
-        saNode2 = 120;
+        saNode = 70;
+        avNode1 = 20;
+        avNode2 = 120;
     }
 
     public static void calculateheartRate(int heartRate){
