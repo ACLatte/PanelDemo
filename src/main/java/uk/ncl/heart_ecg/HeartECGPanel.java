@@ -6,6 +6,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+* normal heart ECG
+* */
 public class HeartECGPanel extends JPanel {
     public HeartECGPanel(){}
 
@@ -24,8 +27,17 @@ public class HeartECGPanel extends JPanel {
 
     private static ArrayList<Integer> temporary = new ArrayList<Integer>();
 
+    public static boolean paint = false;
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        if (paint){
+            count = 0;
+            xValue = 100;
+            x_axis.clear();
+            y_axis.clear();
+        }
 
         //before every paint ecg chart clear entity panel
         g.clearRect(0,0,1200,150);

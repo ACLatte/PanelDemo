@@ -7,6 +7,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+* pacemaker ECG
+* */
 public class PacemakerECGPanel extends JPanel {
     public PacemakerECGPanel(){}
 
@@ -25,40 +28,48 @@ public class PacemakerECGPanel extends JPanel {
 
     private static ArrayList<Integer> temporary = new ArrayList<Integer>();
 
+    public static boolean paint = false;
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        if (paint){
+            count = 0;
+            xValue = 100;
+            x_axis.clear();
+            y_axis.clear();
+        }
         //before every paint ecg chart clear entity panel
         g.clearRect(0,0,1200,150);
-        g.setColor(Color.RED);
-
-        if (xValue<=1100) {
-            x_axis.add(xValue);
-            xValue += TEP;
-        }
-
-        y_axis.add(singleYData());
 
 
-        if (xValue > 1100){
-            //the length of x_axis 1100;
-            y_axis.remove(0);
-        }
+            g.setColor(Color.RED);
 
-        //prepare Array to paint chart
-        int[] x_array = new int[201];
-        int[] y_array = new int[201];
+            if (xValue <= 1100) {
+                x_axis.add(xValue);
+                xValue += TEP;
+            }
 
-        for (int i = 0; i<x_axis.size() ;i++ ){
-            x_array[i] = x_axis.get(i);
-        }
-        for (int i = 0; i<y_axis.size() ;i++ ){
-            y_array[i] = y_axis.get(i);
-        }
+            y_axis.add(singleYData());
 
-        //draw the ecg chart
-        g.drawPolyline(x_array,y_array,y_axis.size());
+
+            if (xValue > 1100) {
+                //the length of x_axis 1100;
+                y_axis.remove(0);
+            }
+
+            //prepare Array to paint chart
+            int[] x_array = new int[201];
+            int[] y_array = new int[201];
+
+            for (int i = 0; i < x_axis.size(); i++) {
+                x_array[i] = x_axis.get(i);
+            }
+            for (int i = 0; i < y_axis.size(); i++) {
+                y_array[i] = y_axis.get(i);
+            }
+
+            //draw the ecg chart
+            g.drawPolyline(x_array, y_array, y_axis.size());
 
     }
 

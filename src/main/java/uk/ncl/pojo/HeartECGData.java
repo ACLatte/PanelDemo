@@ -2,6 +2,9 @@ package uk.ncl.pojo;
 
 import java.util.ArrayList;
 
+/*
+* Heart ECG data static Tools class
+* */
 public class HeartECGData {
     //the middle value of chart
     public static int middleNode = 100;

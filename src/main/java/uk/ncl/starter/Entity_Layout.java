@@ -3,8 +3,6 @@ import uk.ncl.heart_ecg.HeartECGPanel;
 import uk.ncl.pacemaker_ecg.PacemakerECGPanel;
 import uk.ncl.pojo.HeartECGData;
 import uk.ncl.pojo.PacemakerModeData;
-
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -12,15 +10,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 /*
- * @author YSN
+ * @author Yang
  * this class to do the integral software layout
  */
-public class Entity_Layout {
-
-    //integral container
-    JFrame simulator =new JFrame("Simulator");
+public class Entity_Layout extends JFrame {
 
     private JLabel heartLabel = new JLabel("Heart Beat");
     //Heart ECG Chart create position
@@ -41,8 +35,12 @@ public class Entity_Layout {
     private JButton heart_RESET = new JButton("RESET");
 
     //the button control pacemaker start and stop
-    private JLabel pacemakerLabel = new JLabel("Pacemaker:");
+    private JLabel pacemakerLabel = new JLabel("Pace Mode:");
     private JLabel pacemaker_Mode = new JLabel("OFF");
+    private JLabel pacemaker_Pacing_SA_Node = new JLabel("SA Node:");
+    private JLabel pacemaker_Pacing_AV_Node = new JLabel("AV Node:");
+    private JLabel pacemaker_Pacing_SA_Satuts = new JLabel("");
+    private JLabel pacemaker_Pacing_AV_Satuts = new JLabel("");
 
     //Pacemaker ECG Chart create position
     private PacemakerECGPanel pacemakerECG = new PacemakerECGPanel();
@@ -52,7 +50,6 @@ public class Entity_Layout {
     private JButton VDD = new JButton("VDD");
     private JButton DDD = new JButton("DDD");
     private JButton mode_ON = new JButton("OFF");
-
 
     private JLabel batteryLabel = new JLabel("Battery Failure");
     //the slider control battery failure
@@ -66,109 +63,133 @@ public class Entity_Layout {
     private JCheckBox av_nodeCheckBox = new JCheckBox("AV Node Failure");
 
     //control heart chart update immediately
-    private Timer heartTimer = new Timer(100, new ActionListener() {
+    private Timer heartTimer = new Timer(50, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             //this method can automatic call the Panel about paint method
+            HeartECGPanel.paint = false;
             heartECG.repaint();
         }
     });
 
     //control pacemaker chart update immediately
-    private Timer pacemakerTimer = new Timer(100, new ActionListener() {
+    private Timer pacemakerTimer = new Timer(50, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             //this method can automatic call the Panel about paint method
+            PacemakerECGPanel.paint = false;
             pacemakerECG.repaint();
         }
     });
 
-    //layout the integral layout
-    public void initialLayout() {
+    public Entity_Layout(){
 
-        //simulator.setResizable(true);
-        simulator.setSize(new Dimension(1200,600));
-        //simulator.setLocationRelativeTo(null);
-        simulator.setLayout(null);
+        //integral container
+        this.setTitle("Simulator");
+        this.setSize(new Dimension(1200,600));
+        this.setLayout(null);
+
         //setup location and add to frame
         heartLabel.setBounds(0,5,80,20);
         heartLabel.setFont(new Font("black",1 ,15));
-        simulator.add(heartLabel);
-
+        this.add(heartLabel);
 
         //Heart ECG Chart     0,30,1200,150
         heartECG.setBounds(0,30,1200,150);
-        simulator.add(heartECG);
-
+        this.add(heartECG);
 
         heartRate.setBounds(0,192,70,20);
-        simulator.add(heartRate);
+        this.add(heartRate);
 
         heartRateSlider.setBounds(75,185,400,40);
-        simulator.add(heartRateSlider);
+        heartRateSlider.setName("heartRateSlider");
+        this.add(heartRateSlider);
         heartRateSlider.setEnabled(false);
 
         heartRateLabel.setBounds(480,192,70,20);
-        simulator.add(heartRateLabel);
+        heartRateLabel.setName("heartRateLabel");
+        this.add(heartRateLabel);
 
         heart_ON.setBounds(550,187,80,30);
-        simulator.add(heart_ON);
+        heart_ON.setName("heart_ON");
+        this.add(heart_ON);
 
         prInterval.setBounds(0,237,70,20);
-        simulator.add(prInterval);
+        this.add(prInterval);
 
         prIntervalSlider.setBounds(75,230,400,40);
-        simulator.add(prIntervalSlider);
+        prIntervalSlider.setName("prIntervalSlider");
+        this.add(prIntervalSlider);
         prIntervalSlider.setEnabled(false);
 
         prIntervalLabel.setBounds(480,237,70,20);
-        simulator.add(prIntervalLabel);
+        prIntervalLabel.setName("prIntervalLabel");
+        this.add(prIntervalLabel);
 
         heart_RESET.setBounds(550,232,80,30);
-        simulator.add(heart_RESET);
+        heart_RESET.setName("heart_RESET");
+        this.add(heart_RESET);
 
         pacemakerLabel.setBounds(0,270,90,20);
         pacemakerLabel.setFont(new Font("black",1 ,15));
-        simulator.add(pacemakerLabel);
+        this.add(pacemakerLabel);
 
         pacemaker_Mode.setBounds(90,277,40,10);
-        simulator.add(pacemaker_Mode);
-
+        pacemaker_Mode.setName("pacemaker_Mode");
+        this.add(pacemaker_Mode);
+        pacemaker_Pacing_SA_Node.setBounds(230,270,90,20);
+        pacemaker_Pacing_SA_Node.setFont(new Font("black",1 ,15));
+        this.add(pacemaker_Pacing_SA_Node);
+        pacemaker_Pacing_SA_Satuts.setBounds(320,270,40,20);
+        pacemaker_Pacing_SA_Satuts.setName("pacemaker_Pacing_SA_Satuts");
+        this.add(pacemaker_Pacing_SA_Satuts);
+        pacemaker_Pacing_AV_Node.setBounds(460,270,90,20);
+        pacemaker_Pacing_AV_Node.setFont(new Font("black",1 ,15));
+        this.add(pacemaker_Pacing_AV_Node);
+        pacemaker_Pacing_AV_Satuts.setBounds(560,270,40,20);
+        pacemaker_Pacing_AV_Satuts.setName("pacemaker_Pacing_AV_Satuts");
+        this.add(pacemaker_Pacing_AV_Satuts);
 
         //Pacemaker ECG Chart     0,295,1200,150
         pacemakerECG.setBounds(0,295,1200,150);
-        simulator.add(pacemakerECG);
-
+        this.add(pacemakerECG);
 
         AAI.setBounds(10,450,80,30);
-        simulator.add(AAI);
+        AAI.setName("AAI");
+        this.add(AAI);
         VDD.setBounds(100,450,80,30);
-        simulator.add(VDD);
+        VDD.setName("VDD");
+        this.add(VDD);
         DDD.setBounds(190,450,80,30);
-        simulator.add(DDD);
+        DDD.setName("DDD");
+        this.add(DDD);
         mode_ON.setBounds(280,450,80,30);
-        simulator.add(mode_ON);
+        mode_ON.setName("mode_ON");
+        this.add(mode_ON);
 
         batteryLabel.setBounds(0,485,120,20);
         batteryLabel.setFont(new Font("black",1 ,15));
-        simulator.add(batteryLabel);
+        this.add(batteryLabel);
         batterySlider.setBounds(0,510,400,40);
         batterySlider.setEnabled(false);
-        simulator.add(batterySlider);
+        batterySlider.setName("batterySlider");
+        this.add(batterySlider);
         batteryPercentLabel.setBounds(405,517,40,20);
-        simulator.add(batteryPercentLabel);
+        batteryPercentLabel.setName("batteryPercentLabel");
+        this.add(batteryPercentLabel);
         batteryButton.setBounds(445,512,80,30);
-        simulator.add(batteryButton);
+        batteryButton.setName("batteryButton");
+        this.add(batteryButton);
 
         leadsLabel.setBounds(600,485,120,20);
         leadsLabel.setFont(new Font("black",1 ,15));
-        simulator.add(leadsLabel);
+        this.add(leadsLabel);
         sa_nodeCheckBox.setBounds(600,510,200,20);
-        simulator.add(sa_nodeCheckBox);
+        this.add(sa_nodeCheckBox);
         av_nodeCheckBox.setBounds(600,530,200,20);
-        simulator.add(av_nodeCheckBox);
+        this.add(av_nodeCheckBox);
 
         //All listeners below using for linkage
 
-        //heart rate slider
+        //heart rate slider listener
         heartRateSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -179,158 +200,314 @@ public class Entity_Layout {
                 }else if (heartRateSlider.getValue() > 0 && heartRateSlider.getValue() <= 5){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(47);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
-                        PacemakerModeData.calculateheartRate(47);
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
                     }
                 }else if (heartRateSlider.getValue() > 5 && heartRateSlider.getValue() <= 10){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(45);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
-                        PacemakerModeData.calculateheartRate(45);
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
                     }
                 }else if (heartRateSlider.getValue() > 10 && heartRateSlider.getValue() <= 15){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(43);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
-                        PacemakerModeData.calculateheartRate(43);
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
                     }
                 }else if (heartRateSlider.getValue() > 15 && heartRateSlider.getValue() <= 20){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(41);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
-                        PacemakerModeData.calculateheartRate(41);
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
                     }
                 }else if (heartRateSlider.getValue() > 20 && heartRateSlider.getValue() <= 25){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(39);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
-                        PacemakerModeData.calculateheartRate(39);
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
                     }
                 }else if (heartRateSlider.getValue() > 25 && heartRateSlider.getValue() <= 30){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(37);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
-                        PacemakerModeData.calculateheartRate(37);
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
                     }
                 }else if (heartRateSlider.getValue() > 30 && heartRateSlider.getValue() <= 35){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(35);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
-                        PacemakerModeData.calculateheartRate(35);
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
                     }
                 }else if (heartRateSlider.getValue() > 35 && heartRateSlider.getValue() <= 40){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(33);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
-                        PacemakerModeData.calculateheartRate(33);
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
                     }
                 }else if (heartRateSlider.getValue() > 45 && heartRateSlider.getValue() <= 50){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(31);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
-                        PacemakerModeData.calculateheartRate(31);
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
                     }
                 }else if (heartRateSlider.getValue() > 55 && heartRateSlider.getValue() <= 60){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(29);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
-                        PacemakerModeData.calculateheartRate(29);
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
                     }
                 }else if (heartRateSlider.getValue() >65 && heartRateSlider.getValue() <= 70){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(27);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >70 && heartRateSlider.getValue() <= 80){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(26);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(26);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(26);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >80 && heartRateSlider.getValue() <= 90){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(25);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(25);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(25);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >90 && heartRateSlider.getValue() <= 100){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(24);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(24);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(24);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >100 && heartRateSlider.getValue() <= 110){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(23);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(23);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(23);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >110 && heartRateSlider.getValue() <= 120){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(22);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(22);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(22);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >120 && heartRateSlider.getValue() <= 130){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(21);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(21);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(21);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >130 && heartRateSlider.getValue() <= 140){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(20);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(20);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(20);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >140 && heartRateSlider.getValue() <= 150){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(19);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(19);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(19);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >150 && heartRateSlider.getValue() <= 160){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(18);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(18);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(18);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >160 && heartRateSlider.getValue() <= 170){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(17);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(17);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(17);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >170 && heartRateSlider.getValue() <= 180){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(16);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(16);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(16);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >180 && heartRateSlider.getValue() <= 190){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(15);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(15);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(15);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >190 && heartRateSlider.getValue() <= 200){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(14);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(14);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(14);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >200 && heartRateSlider.getValue() <= 210){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(13);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(13);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(13);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }else if (heartRateSlider.getValue() >210 && heartRateSlider.getValue() <= 220){
                     HeartECGData.EcgRevive();
                     HeartECGData.calculateheartRate(12);
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(12);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }
                     if (pacemaker_Mode.getText() == "DDD"){
                         PacemakerModeData.calculateheartRate(12);
+                        pacemaker_Pacing_SA_Satuts.setText("Inhibit");
                     }
                 }
             }
@@ -346,6 +523,8 @@ public class Entity_Layout {
                     prIntervalSlider.setEnabled(true);
                     heart_ON.setText("OFF");
                 }else if (heart_ON.getText() == "OFF"){
+                    HeartECGPanel.paint = true;
+                    heartECG.repaint();
                     heartTimer.stop();
                     heartRateSlider.setValue(70);
                     heartRateSlider.setEnabled(false);
@@ -365,161 +544,353 @@ public class Entity_Layout {
                     HeartECGData.calculateprInterval(2);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(2);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(2);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 5 && prIntervalSlider.getValue() <= 10){
                     HeartECGData.calculateprInterval(3);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(3);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(3);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 10 && prIntervalSlider.getValue() <= 15){
                     HeartECGData.calculateprInterval(4);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(4);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(4);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 15 && prIntervalSlider.getValue() <= 20){
                     HeartECGData.calculateprInterval(5);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(5);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(5);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 20 && prIntervalSlider.getValue() <= 25){
                     HeartECGData.calculateprInterval(6);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(6);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(6);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 25 && prIntervalSlider.getValue() <= 30){
                     HeartECGData.calculateprInterval(7);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(7);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(7);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 30 && prIntervalSlider.getValue() <= 35){
                     HeartECGData.calculateprInterval(8);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(8);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(8);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 35 && prIntervalSlider.getValue() <= 40){
                     HeartECGData.calculateprInterval(9);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(9);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(9);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 40 && prIntervalSlider.getValue() <= 50){
                     HeartECGData.calculateprInterval(10);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(10);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(10);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 50 && prIntervalSlider.getValue() <= 60){
                     HeartECGData.calculateprInterval(11);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(11);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(11);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 60 && prIntervalSlider.getValue() <= 70){
                     HeartECGData.calculateprInterval(12);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(12);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(12);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 70 && prIntervalSlider.getValue() <= 80){
                     HeartECGData.calculateprInterval(13);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(13);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(13);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 80 && prIntervalSlider.getValue() <= 90){
                     HeartECGData.calculateprInterval(14);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(14);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(14);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 90 && prIntervalSlider.getValue() <= 100){
                     HeartECGData.calculateprInterval(15);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(15);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(15);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 100 && prIntervalSlider.getValue() <= 110){
                     HeartECGData.calculateprInterval(16);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(16);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(16);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 110 && prIntervalSlider.getValue() <= 120){
                     HeartECGData.calculateprInterval(17);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(17);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(17);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 120 && prIntervalSlider.getValue() <= 130){
                     HeartECGData.calculateprInterval(18);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(18);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(18);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() > 130 && prIntervalSlider.getValue() <= 140){
                     HeartECGData.calculateprInterval(19);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(19);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(19);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() >140 && prIntervalSlider.getValue() <= 150){
                     HeartECGData.calculateprInterval(20);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() >150 && prIntervalSlider.getValue() <= 170){
                     HeartECGData.calculateprInterval(23);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(23);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() >170 && prIntervalSlider.getValue() <= 190){
                     HeartECGData.calculateprInterval(24);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(24);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() >190 && prIntervalSlider.getValue() <= 210){
                     HeartECGData.calculateprInterval(25);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(25);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                 }else if (prIntervalSlider.getValue() >210 && prIntervalSlider.getValue() <= 230){
                     HeartECGData.calculateprInterval(26);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(26);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                 }else if (prIntervalSlider.getValue() >230 && prIntervalSlider.getValue() <= 250){
                     HeartECGData.calculateprInterval(27);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(27);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                 }else if (prIntervalSlider.getValue() >250 && prIntervalSlider.getValue() <= 270){
                     HeartECGData.calculateprInterval(28);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(28);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                 }else if (prIntervalSlider.getValue() >270 && prIntervalSlider.getValue() <= 290){
                     HeartECGData.calculateprInterval(29);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(29);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                 }else if (prIntervalSlider.getValue() >310 && prIntervalSlider.getValue() <= 330){
                     HeartECGData.calculateprInterval(30);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(30);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                 }else if (prIntervalSlider.getValue() >330 && prIntervalSlider.getValue() <= 350){
                     HeartECGData.calculateprInterval(31);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(31);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                 }else if (prIntervalSlider.getValue() >350 && prIntervalSlider.getValue() <= 400){
                     HeartECGData.calculateprInterval(32);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(32);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                 }else if (prIntervalSlider.getValue() >400 && prIntervalSlider.getValue() <= 450){
                     HeartECGData.calculateprInterval(33);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(33);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                 }else if (prIntervalSlider.getValue() >450 && prIntervalSlider.getValue() <= 500){
                     HeartECGData.calculateprInterval(34);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(34);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                 }else if (prIntervalSlider.getValue() >500 && prIntervalSlider.getValue() <= 550){
                     HeartECGData.calculateprInterval(35);
                     if (pacemaker_Mode.getText() == "VDD"){
-                        PacemakerModeData.calculateprInterval(35);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }
+                    if (pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                 }
             }
@@ -537,6 +908,10 @@ public class Entity_Layout {
         AAI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                PacemakerECGPanel.paint = true;
+                pacemakerECG.repaint();
+                pacemaker_Pacing_SA_Satuts.setText("");
+                pacemaker_Pacing_AV_Satuts.setText("");
                 PacemakerModeData.calculateheartRate(27);
                 PacemakerModeData.calculateprInterval(20);
                 pacemakerTimer.start();
@@ -551,6 +926,10 @@ public class Entity_Layout {
         VDD.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                PacemakerECGPanel.paint = true;
+                pacemakerECG.repaint();
+                pacemaker_Pacing_SA_Satuts.setText("");
+                pacemaker_Pacing_AV_Satuts.setText("");
                 PacemakerModeData.calculateheartRate(27);
                 PacemakerModeData.calculateprInterval(20);
                 pacemakerTimer.start();
@@ -565,6 +944,10 @@ public class Entity_Layout {
         DDD.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                PacemakerECGPanel.paint = true;
+                pacemakerECG.repaint();
+                pacemaker_Pacing_SA_Satuts.setText("");
+                pacemaker_Pacing_AV_Satuts.setText("");
                 PacemakerModeData.calculateheartRate(27);
                 PacemakerModeData.calculateprInterval(20);
                 pacemakerTimer.start();
@@ -579,10 +962,14 @@ public class Entity_Layout {
         mode_ON.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                pacemaker_Pacing_SA_Satuts.setText("");
+                pacemaker_Pacing_AV_Satuts.setText("");
                 if (mode_ON.getText() == "OFF"){
                     mode_ON.setText("ON");
                     pacemaker_Mode.setText("ON");
                 }else{
+                    PacemakerECGPanel.paint = true;
+                    pacemakerECG.repaint();
                     pacemakerTimer.stop();
                     mode_ON.setText("OFF");
                     pacemaker_Mode.setText("OFF");
@@ -695,10 +1082,14 @@ public class Entity_Layout {
             }
         });
 
+        //init ECG data
+        PacemakerECGPanel.initTemporary();
+        HeartECGPanel.initTemporary();
         //setup frame visible
-        simulator.setVisible(true);
-        //setup clip top right X stop project
-        simulator.setDefaultCloseOperation(3);
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        //setup click right X-Symbol stop project
+        this.setDefaultCloseOperation(3);
     }
 
 }

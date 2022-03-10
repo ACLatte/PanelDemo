@@ -2,6 +2,9 @@ package uk.ncl.pojo;
 
 import java.util.ArrayList;
 
+/*
+* pacemaker ECG data static Tools class
+* */
 public class PacemakerModeData {
     //the middle value of chart
     public static int middleNode = 100;
