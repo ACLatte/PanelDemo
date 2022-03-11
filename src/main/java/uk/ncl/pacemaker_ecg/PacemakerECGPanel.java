@@ -121,6 +121,4 @@ public class PacemakerECGPanel extends JPanel {
         temporary.add(PacemakerModeData.avNode2);
     }
 
-
-
 }

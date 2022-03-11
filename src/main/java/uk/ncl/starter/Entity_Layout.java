@@ -9,6 +9,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /*
  * @author Yang
@@ -987,6 +988,20 @@ public class Entity_Layout extends JFrame {
                     batterySlider.setValue(100);
                     batterySlider.setEnabled(false);
                     batteryButton.setText("OFF");
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                        pacemaker_Pacing_AV_Satuts.setText("null");
+                    }else if(pacemaker_Mode.getText() == "VDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }else if(pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateheartRate(27);
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }
                 }
             }
         });
@@ -997,61 +1012,21 @@ public class Entity_Layout extends JFrame {
                 if (batteryButton.getText() == "ON") {
                     batteryPercentLabel.setText(batterySlider.getValue()+"%");
                 }
-                if (batterySlider.getValue() == 100){
-                    PacemakerModeData.saNode = 70;
-                    PacemakerModeData.avNode1 = 20;
-                    PacemakerModeData.avNode2 = 120;
-                    PacemakerECGPanel.addData();
-                }else if (batterySlider.getValue() > 90 && batterySlider.getValue() <= 100){
-                    PacemakerModeData.saNode = 73;
-                    PacemakerModeData.avNode1 = 28;
-                    PacemakerModeData.avNode2 = 118;
-                    PacemakerECGPanel.addData();
-                }else if (batterySlider.getValue() > 80 && batterySlider.getValue() <= 90){
-                    PacemakerModeData.saNode = 76;
-                    PacemakerModeData.avNode1 = 36;
-                    PacemakerModeData.avNode2 = 116;
-                    PacemakerECGPanel.addData();
-                }else if (batterySlider.getValue() > 70 && batterySlider.getValue() <= 80){
-                    PacemakerModeData.saNode = 79;
-                    PacemakerModeData.avNode1 = 42;
-                    PacemakerModeData.avNode2 = 114;
-                    PacemakerECGPanel.addData();
-                }else if (batterySlider.getValue() > 60 && batterySlider.getValue() <= 70){
-                    PacemakerModeData.saNode = 82;
-                    PacemakerModeData.avNode1 = 50;
-                    PacemakerModeData.avNode2 = 112;
-                    PacemakerECGPanel.addData();
-                }else if (batterySlider.getValue() > 50 && batterySlider.getValue() <= 60){
-                    PacemakerModeData.saNode = 85;
-                    PacemakerModeData.avNode1 = 58;
-                    PacemakerModeData.avNode2 = 100;
-                    PacemakerECGPanel.addData();
-                }else if (batterySlider.getValue() > 40 && batterySlider.getValue() <= 50){
-                    PacemakerModeData.saNode = 88;
-                    PacemakerModeData.avNode1 = 66;
-                    PacemakerModeData.avNode2 = 108;
-                    PacemakerECGPanel.addData();
-                }else if (batterySlider.getValue() > 30 && batterySlider.getValue() <= 40){
-                    PacemakerModeData.saNode = 91;
-                    PacemakerModeData.avNode1 = 74;
-                    PacemakerModeData.avNode2 = 106;
-                    PacemakerECGPanel.addData();
-                }else if (batterySlider.getValue() > 20 && batterySlider.getValue() <= 30){
-                    PacemakerModeData.saNode = 94;
-                    PacemakerModeData.avNode1 = 82;
-                    PacemakerModeData.avNode2 = 104;
-                    PacemakerECGPanel.addData();
-                }else if (batterySlider.getValue() > 10 && batterySlider.getValue() <= 20){
-                    PacemakerModeData.saNode = 97;
-                    PacemakerModeData.avNode1 = 90;
-                    PacemakerModeData.avNode2 = 102;
-                    PacemakerECGPanel.addData();
-                }else if (batterySlider.getValue() >= 0 && batterySlider.getValue() <= 10){
-                    PacemakerModeData.saNode = 100;
-                    PacemakerModeData.avNode1 = 100;
-                    PacemakerModeData.avNode2 = 100;
-                    PacemakerECGPanel.addData();
+                if (batterySlider.getValue() >= 0 && batterySlider.getValue() <= 10){
+                       if (pacemaker_Mode.getText() == "AAI"){
+                           PacemakerModeData.calculateheartRate(40);
+                           pacemaker_Pacing_SA_Satuts.setText("failure");
+                           pacemaker_Pacing_AV_Satuts.setText("null");
+                       }else if(pacemaker_Mode.getText() == "VDD"){
+                           PacemakerModeData.calculateprInterval(35);
+                           pacemaker_Pacing_SA_Satuts.setText("failure");
+                           pacemaker_Pacing_AV_Satuts.setText("failure");
+                       }else if(pacemaker_Mode.getText() == "DDD"){
+                           PacemakerModeData.calculateheartRate(40);
+                           PacemakerModeData.calculateprInterval(35);
+                           pacemaker_Pacing_SA_Satuts.setText("failure");
+                           pacemaker_Pacing_AV_Satuts.setText("failure");
+                       }
                 }
             }
         });
@@ -1059,26 +1034,53 @@ public class Entity_Layout extends JFrame {
         sa_nodeCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (PacemakerModeData.saNode == 100){
-                    PacemakerModeData.saNode = 70;
-                }else {
-                    PacemakerModeData.saNode = 100;
+                if (PacemakerModeData.getCount() == 50){
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(40);
+                        pacemaker_Pacing_SA_Satuts.setText("failure");
+                    }else if(pacemaker_Mode.getText() == "VDD"){
+                        PacemakerModeData.calculateheartRate(28);
+                        pacemaker_Pacing_SA_Satuts.setText("failure");
+                    }else if(pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateheartRate(40);
+                        pacemaker_Pacing_SA_Satuts.setText("failure");
+                    }
+                }else{
+                    if (pacemaker_Mode.getText() == "AAI"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                    }else if(pacemaker_Mode.getText() == "VDD"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
+                    }else if(pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateheartRate(27);
+                        pacemaker_Pacing_SA_Satuts.setText("pacing");
+                    }
                 }
-                PacemakerECGPanel.addData();
             }
         });
 
         av_nodeCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (PacemakerModeData.avNode1 == 100){
-                    PacemakerModeData.avNode1 = 20;
-                    PacemakerModeData.avNode2 = 120;
-                }else {
-                    PacemakerModeData.avNode1 = 100;
-                    PacemakerModeData.avNode2 = 100;
+                if (PacemakerModeData.getCount() == 50){
+                    if(pacemaker_Mode.getText() == "VDD"){
+                        PacemakerModeData.calculateprInterval(35);
+                        pacemaker_Pacing_AV_Satuts.setText("failure");
+                    }else if(pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(35);
+                        pacemaker_Pacing_AV_Satuts.setText("failure");
+                    }
+                }else{
+                    if(pacemaker_Mode.getText() == "VDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }else if(pacemaker_Mode.getText() == "DDD"){
+                        PacemakerModeData.calculateprInterval(20);
+                        pacemaker_Pacing_AV_Satuts.setText("pacing");
+                    }
                 }
-                PacemakerECGPanel.addData();
+
             }
         });
 
