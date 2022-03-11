@@ -544,7 +544,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(2);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(2);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -555,7 +555,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(3);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(3);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -566,7 +566,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(4);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(4);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -577,7 +577,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(5);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(5);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -588,7 +588,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(6);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(6);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -599,7 +599,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(7);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(7);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -610,7 +610,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(8);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(8);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -621,7 +621,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(9);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(9);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -632,7 +632,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(10);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(10);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -643,7 +643,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(11);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(11);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -654,7 +654,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(12);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(12);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -665,7 +665,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(13);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(13);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -676,7 +676,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(14);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(14);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -687,7 +687,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(15);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(15);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -698,7 +698,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(16);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(16);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -709,7 +709,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(17);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(17);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -720,7 +720,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(18);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(18);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -731,7 +731,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(19);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(19);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -742,7 +742,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(20);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -753,7 +753,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(23);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -764,7 +764,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(24);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -775,7 +775,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(25);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("Inhibit");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -786,7 +786,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(26);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -797,7 +797,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(27);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -808,7 +808,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(28);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -819,7 +819,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(29);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -830,7 +830,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(30);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -841,7 +841,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(31);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -852,7 +852,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(32);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -863,7 +863,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(33);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -874,7 +874,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(34);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
@@ -885,7 +885,7 @@ public class Entity_Layout extends JFrame {
                     HeartECGData.calculateprInterval(35);
                     if (pacemaker_Mode.getText() == "VDD"){
                         PacemakerModeData.calculateprInterval(20);
-                        pacemaker_Pacing_SA_Satuts.setText("null");
+                        pacemaker_Pacing_SA_Satuts.setText("sensing");
                         pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
                     if (pacemaker_Mode.getText() == "DDD"){
