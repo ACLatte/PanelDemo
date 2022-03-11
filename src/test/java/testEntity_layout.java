@@ -11,7 +11,7 @@ import uk.ncl.starter.Entity_Layout;
 * that will causing Junit-test running failed
 *
 * But running the test class several times shows that all the test methods work correctly
-* So the event logic of the layout module's click-and-slide and tab content is fine
+* So the event logic of the layout module's Button,Slider and Label is fine
 *
 * */
 

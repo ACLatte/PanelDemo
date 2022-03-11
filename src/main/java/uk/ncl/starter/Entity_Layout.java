@@ -138,7 +138,7 @@ public class Entity_Layout extends JFrame {
         pacemaker_Pacing_SA_Node.setBounds(230,270,90,20);
         pacemaker_Pacing_SA_Node.setFont(new Font("black",1 ,15));
         this.add(pacemaker_Pacing_SA_Node);
-        pacemaker_Pacing_SA_Satuts.setBounds(320,270,40,20);
+        pacemaker_Pacing_SA_Satuts.setBounds(320,270,45,20);
         pacemaker_Pacing_SA_Satuts.setName("pacemaker_Pacing_SA_Satuts");
         this.add(pacemaker_Pacing_SA_Satuts);
         pacemaker_Pacing_AV_Node.setBounds(460,270,90,20);
