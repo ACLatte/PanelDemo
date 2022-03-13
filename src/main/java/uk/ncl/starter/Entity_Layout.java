@@ -50,13 +50,14 @@ public class Entity_Layout extends JFrame {
     private JButton AAI = new JButton("AAI");
     private JButton VDD = new JButton("VDD");
     private JButton DDD = new JButton("DDD");
-    private JButton mode_ON = new JButton("OFF");
+    private JButton OOO = new JButton("000");
+    private JButton mode_ON = new JButton("ON");
 
     private JLabel batteryLabel = new JLabel("Battery Failure");
     //the slider control battery failure
     private JSlider batterySlider = new JSlider(0, 100, 100);
     private JLabel batteryPercentLabel = new JLabel("100%");
-    private JButton batteryButton = new JButton("OFF");
+    private JButton batteryButton = new JButton("ON");
 
     private JLabel leadsLabel = new JLabel("Leads Failure");
     //the checkbox control which leads failure
@@ -162,7 +163,9 @@ public class Entity_Layout extends JFrame {
         DDD.setBounds(190,450,80,30);
         DDD.setName("DDD");
         this.add(DDD);
-        mode_ON.setBounds(280,450,80,30);
+        OOO.setBounds(280,450,80,30);
+        this.add(OOO);
+        mode_ON.setBounds(370,450,80,30);
         mode_ON.setName("mode_ON");
         this.add(mode_ON);
 
@@ -916,9 +919,9 @@ public class Entity_Layout extends JFrame {
                 PacemakerModeData.calculateheartRate(27);
                 PacemakerModeData.calculateprInterval(20);
                 pacemakerTimer.start();
-                if (mode_ON.getText() != "OFF"){
+                if (pacemaker_Mode.getText() != "OFF"){
                     pacemaker_Mode.setText("AAI");
-                }else if (mode_ON.getText() == "OFF"){
+                }else if (pacemaker_Mode.getText() == "OFF"){
                     pacemakerTimer.stop();
                 }
             }
@@ -934,9 +937,9 @@ public class Entity_Layout extends JFrame {
                 PacemakerModeData.calculateheartRate(27);
                 PacemakerModeData.calculateprInterval(20);
                 pacemakerTimer.start();
-                if (mode_ON.getText() != "OFF") {
+                if (pacemaker_Mode.getText() != "OFF") {
                     pacemaker_Mode.setText("VDD");
-                }else if (mode_ON.getText() == "OFF"){
+                }else if (pacemaker_Mode.getText() == "OFF"){
                     pacemakerTimer.stop();
                 }
             }
@@ -952,9 +955,32 @@ public class Entity_Layout extends JFrame {
                 PacemakerModeData.calculateheartRate(27);
                 PacemakerModeData.calculateprInterval(20);
                 pacemakerTimer.start();
-                if (mode_ON.getText() != "OFF") {
+                if (pacemaker_Mode.getText() != "OFF") {
                     pacemaker_Mode.setText("DDD");
-                }else if (mode_ON.getText() == "OFF"){
+                }else if (pacemaker_Mode.getText() == "OFF"){
+                    pacemakerTimer.stop();
+                }
+            }
+        });
+
+        //get current container object
+        final Container container = this.getContentPane();
+
+        OOO.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //this function is clear the data in the ECG diagram, and coordinate with Timer to use
+                PacemakerECGPanel.paint = true;
+                pacemakerECG.repaint();
+                pacemaker_Pacing_SA_Satuts.setText("");
+                pacemaker_Pacing_AV_Satuts.setText("");
+                //pause Timer stop draw ECG
+                pacemakerTimer.stop();
+                if (pacemaker_Mode.getText() != "OFF") {
+                    pacemaker_Mode.setText("OOO");
+                    JOptionPane.showMessageDialog(container,"User is not in NFC range" +
+                            " so can not change mode to OOO mode");
+                }else if (pacemaker_Mode.getText() == "OFF"){
                     pacemakerTimer.stop();
                 }
             }
@@ -966,14 +992,14 @@ public class Entity_Layout extends JFrame {
                 pacemaker_Pacing_SA_Satuts.setText("");
                 pacemaker_Pacing_AV_Satuts.setText("");
                 if (mode_ON.getText() == "OFF"){
-                    mode_ON.setText("ON");
-                    pacemaker_Mode.setText("ON");
-                }else{
                     PacemakerECGPanel.paint = true;
                     pacemakerECG.repaint();
                     pacemakerTimer.stop();
-                    mode_ON.setText("OFF");
+                    mode_ON.setText("ON");
                     pacemaker_Mode.setText("OFF");
+                }else{
+                    mode_ON.setText("OFF");
+                    pacemaker_Mode.setText("ON");
                 }
             }
         });
@@ -982,12 +1008,9 @@ public class Entity_Layout extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (batteryButton.getText() == "OFF"){
-                    batterySlider.setEnabled(true);
-                    batteryButton.setText("ON");
-                }else {
                     batterySlider.setValue(100);
                     batterySlider.setEnabled(false);
-                    batteryButton.setText("OFF");
+                    batteryButton.setText("ON");
                     if (pacemaker_Mode.getText() == "AAI"){
                         PacemakerModeData.calculateheartRate(27);
                         pacemaker_Pacing_SA_Satuts.setText("pacing");
@@ -1002,6 +1025,9 @@ public class Entity_Layout extends JFrame {
                         pacemaker_Pacing_SA_Satuts.setText("pacing");
                         pacemaker_Pacing_AV_Satuts.setText("pacing");
                     }
+                }else {
+                    batterySlider.setEnabled(true);
+                    batteryButton.setText("OFF");
                 }
             }
         });
@@ -1009,7 +1035,7 @@ public class Entity_Layout extends JFrame {
         batterySlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                if (batteryButton.getText() == "ON") {
+                if (batteryButton.getText() == "OFF") {
                     batteryPercentLabel.setText(batterySlider.getValue()+"%");
                 }
                 if (batterySlider.getValue() >= 0 && batterySlider.getValue() <= 10){
